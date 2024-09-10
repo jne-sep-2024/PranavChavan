@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+          //global variables
+          var name="pranav"
+          document.write("<h1>Global variables::</h1>"+name)
+           //let local variable
+           let i=7;
+           document.write("<h1>Global variables::</h1>"+name)
+          
+           function show()
+           {
+            let temp_var=9
+            document.write("<h1>local variables::</h1>"+temp_var)
+            document.write("<h1>Global variables::</h1>"+name)
+          
+          
+           }
+           document.write("<h1>Global variables::</h1>"+i)
+          
+           show()
+           const z = 30;
+
+           document.write("<h1>const variables::</h1>"+z)
+           
+        </script>
+</body>
+</html>

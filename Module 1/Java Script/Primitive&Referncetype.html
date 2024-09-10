@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.write("<br><h1>Primitive types</h1>")
+          
+        var number1=1 //number for both  integer and floating point number 
+        document.write("<br><h1>in numbe integer format::</h1>"+number1);
+        var number2=1.1 //float number 
+        document.write("<br><h1>in float format::</h1>"+number2);
+         let name="pranav";//string double qoutes
+        document.write("<br><h1>in string format::</h1>"+name);
+          let last_name='chavan';
+          document.write("<br><h1>in single string format</h1>"+last_name)
+          let condition1=true
+          document.write("<br><h1>boolean format</h1>"+condition1)
+          let condition2=Boolean(false);
+          document.write("<br><h1>in boolean() format</h1>"+condition2)
+          let undefined_var;
+          document.write("<br><h1>undefined variable</h1>"+undefined_var)
+           
+          
+        document.write("<br><h1>Reference types</h1>")
+          //Object
+        let person={
+            name:"pranav"
+            ,age:24,
+            Mob_number:987654322
+        }
+ 
+        document.write("<br><h1>Object key 1 with value </h1>"+person.name)
+        
+        document.write("<br><h1>Object key 2 with value </h1>"+person.age)
+        
+        document.write("<br><h1>Object key 2 with value </h1>"+person.Mob_number)
+
+        //Array
+        var array1=[1,2,3,4,5]
+        document.write("<h1>Array printing::</h1>")
+        array1.forEach(Number=> document.write(Number))
+        //function 
+         //set,map
+          
+    </script>
+</body>
+</html>
