@@ -1,5 +1,5 @@
 console.log("conditional statements")
-//if-else
+//if-else 
 var student_age1=24;
 var student_age2=34;
 console.log("-------if/else-------")

@@ -1,4 +1,4 @@
-console.log("A-------------Arithmetic operator------------")
+console.log("A--------------Arithmetic operator------------")
 var number1=23;
 var number2=24;
 console.log("Addition Operator + ::"+(number1+number2))

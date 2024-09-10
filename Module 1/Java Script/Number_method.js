@@ -4,6 +4,8 @@ var num1 = 21;
 var num2="12.3"
 console.log("Number Properties");
 
+
+
 // Access Number properties through the Number object
 console.log("Number.MIN_VALUE: " + Number.MIN_VALUE); // Smallest positive value representable
 console.log("Number.MAX_VALUE: " + Number.MAX_VALUE); // Largest positive value representable
