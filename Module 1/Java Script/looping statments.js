@@ -1,4 +1,4 @@
-console.log("---------for loop-------------")
+console.log("---------for loop--------------")
 let fruits = ['Apple', 'Banana', 'Cherry'];
 
 for (let i = 0; i < fruits.length; i++) {

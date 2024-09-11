@@ -1,6 +1,6 @@
 let big_int=456789098765434n
 console.log("printing the big int value::"+big_int)
-////////////
+///////////
 let big_int2=BigInt(987654567890)
 console.log("Calling the big int value directly"+big_int2)
 //////////////////difference between them by using adddtion
