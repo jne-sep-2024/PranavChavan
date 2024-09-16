@@ -27,7 +27,6 @@ const User_name = function(name) {
     return `Hello, ${name}!`;
 };
 
-
 console.log(User_name('Pranav')); 
 console.log("------ function Arrow --------")
 const Age = (age) =>  
@@ -39,3 +38,10 @@ let addition=function(a,b)
     return a+b
 };
 console.log(addition(2,4))
+
+let c=21
+let b=31
+console.log(c+b)
+
+
+
