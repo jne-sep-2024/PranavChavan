@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+    <style>
+        .container {
+            background-color: rgb(68, 3, 41);
+            color: aliceblue;
+            width: 21rem;
+            height: auto;
+            position: relative;
+            margin: auto;
+            margin-top: 20px;
+            border-radius: 2%;
+            text-align: center;
+            padding: 20px;
+        }
+        .table-container{
+            border:"1";
+            width:100%;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="font-family: monospace;">Local Storage</h1>
+    
+    <input type="text" id="dataInput" placeholder="Enter some data" />
+    <button id="saveButton">Save Data</button>
+    <button id="loadButton">Load Data</button>
+    <button id="clearButton">Clear Data</button>
+
+    <h2>Stored Data:</h2>
+    <div id="output"></div>
+    <table id="Table" class="table-container">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        </tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Multiplier Box</title>
+     <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    margin: 20;
+    background-color: #ff3c3c;
+}
+
+.container {
+    background-color: #ff9393;
+    border-radius: 9px;
+    /* box-shadow: 9px 6px 10px rgba(0, 0, 0, 0.1); */
+    padding: 20px;
+    width: 90%;
+    max-width: 400px; 
+    text-align: center;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 4px double #ccc;
+    border-radius: 4px;
+    background-color: #ffc6c6;
+}
+
+button {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    background-color: #035215;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #12952e;
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 0px;
+    border: 1px solid #4df0f3;
+    border-radius: 4px;
+    display: inline-block;
+    width: 100%;
+    min-height: 40px;
+}
+h1{
+    font-family: monospace;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculator</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number" />
+    <button id="multiplyButton">Multiply</button>
+    <div id="result" class="result-box"></div>
+    <button id="multiplyButton">+</button>
+    <button id="multiplyButton">-</button>
+    <button id="multiplyButton">+</button>
+    <button id="multiplyButton">/</button>
+    <button id="multiplyButton">*</button>
+    <button id="multiplyButton">=</button>
+    <button id="multiplyButton">1</button>
+    <button id="multiplyButton">2</button>
+    <button id="multiplyButton">3</button>
+    <button id="multiplyButton">4</button>
+    <button id="multiplyButton">5</button>
+    <button id="multiplyButton">6</button>
+
+    <button id="multiplyButton">7</button>
+    <button id="multiplyButton">8</button>
+    <button id="multiplyButton">9</button>
+    <button id="multiplyButton">0</button>
+
+
+</div>
+
+<script>
+    document.getElementById('multiplyButton').addEventListener('click', () => {
+    const numberInput = document.getElementById('numberInput').value;
+    const multiplier = 2; 
+    const resultBox = document.getElementById('result');
+
+    if (numberInput!="") {
+        const result = numberInput * multiplier;
+        resultBox.textContent = `Result: ${result}`;
+    } else {
+        resultBox.textContent = 'Please enter a number.';
+    }
+});
+
+</script>
+</body>
+</html>
