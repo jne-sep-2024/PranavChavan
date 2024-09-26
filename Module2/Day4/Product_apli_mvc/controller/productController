@@ -1,0 +1,24 @@
+const product=require('../model/product');  
+const path = require('path');
+let products=[];
+
+exports.homePage = (req, res) => {
+    console.log("Index File")
+    res.sendFile(path.join(__dirname, '../view/index.html'));
+};
+
+exports.addProductPage = (req,res) => {
+    res.sendFile(path.join(__dirname, '../view/Add-product.html'));
+};
+
+exports.addProduct = (req,res) => {
+    const { name, price }=req.body;
+  const newProduct = new product(name,price);
+    products.push(newProduct); 
+    res.sendFile(path.join(__dirname,'../view/succsess.html'));
+    console.log(products)
+};
+
+exports.listProducts = (req, res) => {
+    res.json(products);
+};
