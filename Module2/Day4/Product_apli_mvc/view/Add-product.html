@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(30, 210, 105);
+}
+
+h1 {
+    color: #333;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #668d73;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+  </style>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    <form action="/Product-added" method="post">
+        <input type="text" name="name" placeholder="Product-Name" required>
+        <input type="number" name="price" placeholder="Product-Price" required>
+        <button type="submit">Add Product</button>
+    </form>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/Add-product">Add Product</a>
+        <a href="/products">View Products</a>
+    </nav>
+</body>
+</html>
