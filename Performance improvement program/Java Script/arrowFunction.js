@@ -5,7 +5,8 @@ const sum = (num2, num1) => {
     return num1 + num2;
 }
 
-console.log(sum(num1, num2))
+ console.log(sum(num1, num2))
+
 //  Write an arrow function that takes a string and returns the string in uppercase. Use implicit return (single expression without curly braces)
 
 

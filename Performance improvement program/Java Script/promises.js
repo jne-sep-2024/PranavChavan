@@ -1,10 +1,10 @@
- console.log("promises with then and catch")
+  console.log("promises with then and catch")
 
 
-function fetchData() {
+ function fetchData() {
     return new Promise((resolve, reject) => {      
     setTimeout(() => {
-        
+
         const success = true; 
         if (success) {
           resolve("data fetched successfull"); 

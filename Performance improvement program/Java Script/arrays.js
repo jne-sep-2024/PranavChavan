@@ -1,7 +1,7 @@
 let numerList=[1,2,3,4,5]
 let str="epsilon";
 
-//from 
+  //from 
 let arr=Array.from(str);
 console.log(typeof arr,arr);
 

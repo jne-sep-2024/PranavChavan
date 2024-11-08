@@ -5,7 +5,7 @@ const result=()=>{
    return number1+number2;    
 }
 
-console.log(result())
+ console.log(result())
 
 // Write an anonymous function that takes two parameters (a number and a string) and prints a greeting message combining them. Assign this function to a variable and invoke it.
 
