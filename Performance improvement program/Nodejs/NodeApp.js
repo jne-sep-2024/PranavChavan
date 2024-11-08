@@ -14,7 +14,8 @@ server.listen(3000, () => {
 
 
 // Create an HTTP server
- server = http.createServer((req, res) => {
+
+server = http.createServer((req, res) => {
  
   if (req.url === '/') {
      

@@ -22,6 +22,7 @@ const Person_details={
     role:121,
     MobNum:99876
 }
+
     if(req.url==='/')
     {
         res.writeHead(200,{'Content-Type':'text/plain'});

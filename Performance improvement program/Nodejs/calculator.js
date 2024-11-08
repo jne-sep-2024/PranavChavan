@@ -31,6 +31,7 @@
            
             console.log("adding");
             
+            
             const a = parseFloat(query.a);
             const b = parseFloat(query.b);
             const sum = a + b;

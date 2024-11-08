@@ -17,6 +17,7 @@ const logRequest = (req, res, next) => {
     next();
   };
   
+  
   const requestHandler = (req, res) => {
    
     if (req.url === '/about') {
@@ -31,7 +32,6 @@ const logRequest = (req, res, next) => {
   const server = http.createServer((req, res) => {
    
     logRequest(req, res, () => {
-      
       requestHandler(req, res);
     });
   });
