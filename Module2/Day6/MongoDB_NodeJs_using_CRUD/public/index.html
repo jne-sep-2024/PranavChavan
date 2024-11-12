@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+</head>
+<body style="background-color: coral;">
+    <h1>Add a New Product</h1>
+    <div class="container" style="background-color: rgba(134, 240, 48, 0.39); border: 2px solid black;">
+        <form id="product-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required step="0.01"><br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br><br><br>
+
+            <label for="imageurl">Image URL:</label>
+            <input type="url" id="imageurl" name="imageurl" required><br><br><br>
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+
+    <h2>Product List</h2>
+    <button id="fetch-products">Fetch Products</button>
+    <div id="product-list"></div>
+
+    <script>
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const formData = new FormData(this);
+            const productData = {
+                title: formData.get('title'),
+                price: parseFloat(formData.get('price')),
+                description: formData.get('description'),
+                imageurl: formData.get('imageurl')
+            };
+
+            fetch('http://localhost:8080/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                alert(data); // Show success message
+                this.reset(); // Reset the form
+                fetchProducts(); // Refresh the product list
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to save product');
+            });
+        });
+
+        function fetchProducts() {
+            fetch('http://localhost:8080/products')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('product-list');
+                    productList.innerHTML = ''; // Clear previous list
+                    products.forEach(product => {
+                        const productItem = document.createElement('div');
+                        productItem.innerHTML = `
+                            <h3>${product.title}</h3>
+                            <p>Price: $${product.price}</p>
+                            <p>Description: ${product.description}</p>
+                            <img src="${product.imageurl}" alt="${product.title}" style="max-width: 100px;">
+                            <button onclick="deleteProduct('${product._id}')">Delete</button>
+                        `;
+                        productList.appendChild(productItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+
+        function deleteProduct(productId) {
+            fetch(`http://localhost:8080/products/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                alert(data); 
+                fetchProducts();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to delete product');
+            });
+        }
+
+        document.getElementById('fetch-products').addEventListener('click', fetchProducts);
+    </script>
+</body>
+</html>
