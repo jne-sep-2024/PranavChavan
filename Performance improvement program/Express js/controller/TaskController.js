@@ -41,12 +41,23 @@ exports.getAllTask=async(req,res)=>{
     {
        console.log("get all task")
       const task=await Task.find();
-      res.status(200).json(task)
+     
+      const currentDate = new Date();
+      const tasks = await Task.find({ dueDate: { $gte: currentDate } });
+       
+      const status_Task="pending";
+      const pendingTask= await Task.find({status:status_Task});
+     
+      const inProgress_Task="in-progress";
+      let taskss=await Task.find({status:inProgress_Task});
+       console.log(pendingTask);
+       res.status(200).json(task)
     }
      catch(error){
          res.status(400).json({ message: error.message });
      }
 }
+
 exports.editEmployee=async(req,res)=>{
      
 

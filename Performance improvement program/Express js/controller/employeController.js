@@ -3,9 +3,12 @@ const Employee=require('../model/employee');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const secretKey='HardToCrack'
+
 exports.createEmployee = async (req, res) => {
+
     try {
-         console.log("Creating employee...");
+
+        console.log("Creating employee...");
          
          const { username, password, email } = req.body;
          
@@ -24,9 +27,10 @@ exports.createEmployee = async (req, res) => {
          });
          
          await employee.save();
-         
+
          res.status(201).json({ message: "Employee Created" });
-     } catch (error) {
+
+        } catch (error) {
          res.status(400).json({ message: error.message });
      }
  };
@@ -34,15 +38,92 @@ exports.createEmployee = async (req, res) => {
 exports.getEmployee=async(req,res)=>{
     try
     {
-        console.log("getting the employee")
-      const id=req.params.id;
-      const employee=await Employee.findById(id)
-      res.status(200).json(employee)
+        console.log("getting the employee123")
+      const empId=req.params.id;
+      console.log("id:::",empId)
+const employee=await Employee.findById(empId)
+
+
+//const employee=await Employee.find({username:req.params.username})  
+//const employee=await Employee.find({email:req.params.email}) 
+
+ const employeeForTask = await Employee.find()
+   .populate('task', 'title description dueDate status')  
+  .exec();
+
+// const tasksForEmployee = await Task.find()
+// .populate('employeeId', 'username email') // populate employee details
+// .exec();
+    
+const LeastTask = await Employee.find({
+    'task.status': 'pending'
+  })  //LeastTask [] getting empty
+console.log("LeastTask",LeastTask)
+// const atLeastTask = await Employee.find({
+//     'task.status': 'pending'  
+//   })
+//   .populate({
+//     path: 'task',              
+//     match: { status: 'pending' },  
+//     select: 'title description dueDate status',  
+//     options: { limit: 5 }     
+//   })
+//   .exec();//[]
+
+// const atLeastTask = await Task.find({
+//     status: 'pending',
+       
+// })
+// .populate('employeeId', 'username email')  // Populate employeeId with username and email
+// .exec();
+
+// console.log(atLeastTask);
+const employeesWithPendingTasks = await Employee.aggregate([
+    {
+      $lookup: {
+        from: 'tasks', // Assuming tasks are in the 'tasks' collection
+        localField: '_id', // The field in the Employee model that corresponds to the _id
+        foreignField: 'employeeId', // Assuming the task collection has an 'employeeId' field that references Employee
+        as: 'task' // The alias for populated tasks
+      }
+    },
+    {
+      $unwind: {
+        path: '$task', // Unwind the 'task' array to get individual tasks
+        preserveNullAndEmptyArrays: true // Keep employees with no tasks as well
+      }
+    },
+    {
+      $match: {
+        'task.status': 'pending' // Filter tasks with status 'pending'
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        username: 1,
+        email: 1,
+        task: {
+          _id: 1,
+          title: 1,
+          description: 1,
+          dueDate: 1,
+          status: 1
+        }
+      }
+    }
+  ]);
+  
+  console.log(employeesWithPendingTasks);
+  
+ console.log(employeeForTask);
+res.status(200).json(employeesWithPendingTasks)
     }
      catch(error){
          res.status(400).json({ message: error.message });
      }
 }
+
 exports.editEmployee=async(req,res)=>{
  try{
     console.log("Edit by id ")
@@ -59,9 +140,9 @@ exports.editEmployee=async(req,res)=>{
 exports.getEmployees=async(req,res)=>{
     try
     {
-        console.log("getting the employee")
+        console.log("getting the employees")
      
-      const employee=await Employee.find()
+      const employee=await Employee.find({})
       res.status(200).json(employee)
     }
      catch(error){

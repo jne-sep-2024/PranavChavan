@@ -12,6 +12,7 @@ mongoose.connect(uri)
 app.use(EmployeeRoutes)
 
 
+
 // Import routes and authentication middleware
 //const userRoutes = require('./userRoutes');
 const productRoutes = require('./productRoutes');

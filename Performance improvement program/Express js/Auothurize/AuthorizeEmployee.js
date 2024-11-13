@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const secretKey='HardToCrack';
 const Employee = require('../model/employee');  
 
+
    module.exports.login = async function(req, res) {
   console.log("login the Employeeee")
   const { email, password } = req.body;
