@@ -13,8 +13,6 @@ routes.get('/employee/employees',EmployeeController.getEmployees);
 routes.get('/employee/:id',verify.verifyToken,EmployeeController.getEmployee);
 
 routes.put('/employee/:id',verify.verifyToken,EmployeeController.editEmployee);
-
-
 //task routes
 routes.post('/employee/task',taskController.createTask);
 routes.get('/employee/task/:id',taskController.getTask);

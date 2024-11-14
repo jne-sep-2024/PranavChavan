@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const secretKey='HardToCrack';
 const Employee = require('../model/employee');  
 
-
    module.exports.login = async function(req, res) {
   console.log("login the Employeeee")
   const { email, password } = req.body;
@@ -21,7 +20,7 @@ const Employee = require('../model/employee');
     const token = jwt.sign(
       { id: employee._id, username: employee.username, email: employee.email }, 
       secretKey, 
-      { expiresIn: '1h' }
+      { expiresIn: '4h' }
     );
 
     res.json({ message: 'Login successful', token });

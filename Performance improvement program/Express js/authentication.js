@@ -17,7 +17,6 @@ const users=[
 ];
 
 
-
 module.exports = function(req, res, next) {
     const token = jwt.sign({ id:req.params.id }, secretKey, { expiresIn: '5m' });
     console.log("token",token)

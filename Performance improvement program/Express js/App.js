@@ -11,14 +11,10 @@ mongoose.connect(uri)
   .catch((error) => console.error("Not connected: " + error));
 app.use(EmployeeRoutes)
 
-
-
 // Import routes and authentication middleware
 //const userRoutes = require('./userRoutes');
 const productRoutes = require('./productRoutes');
 const authentication = require('./authentication');
-
-
 
 // Use authentication middleware for protected routes
 //app.use('/employeee', authentication, userRoutes);
