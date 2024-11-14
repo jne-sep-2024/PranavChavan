@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 10px;
+            background-color: rgb(201, 69, 21);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            width: calc(100% - 22px);
+        }
+
+        button {
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+           
+        }
+
+        th,
+        td {
+            border: 1px solid #b13939;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f55050;
+        }
+    </style>
+</head>
+
+<body style="background-color: #ff2f2f;">
+    <div class="container-fluid">
+        <h1>User data</h1>
+
+        <form id="userForm">
+            <input type="hidden" id="userId">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="number" id="age" placeholder="Age" required>
+            <button type="submit">Add User</button>
+        </form>
+
+        <h2>Users</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const userForm = document.getElementById('userForm');
+        const userIdInput = document.getElementById('userId');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const ageInput = document.getElementById('age');
+        const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+       
+        async function fetchUsers() {
+            const response = await fetch('/users');
+            const users = await response.json();
+            userTableBody.innerHTML = ''; 
+            users.forEach(user => {
+                const userItem = document.createElement('tr'); 
+                userItem.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.age}</td>
+                    <td>
+                        <button onclick="editUser('${user._id}')">Edit</button>
+                        <button onclick="deleteUser('${user._id}')">Delete</button>
+                    </td>
+                `;
+                userTableBody.appendChild(userItem); 
+            });
+        }
+
+        userForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const userId = userIdInput.value;
+            const userData = {
+                name: nameInput.value,
+                email: emailInput.value,
+                age: ageInput.value
+            };
+
+            if (userId) {
+                await fetch(`/users/${userId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+                alert('User updated successfully!');
+            } else {
+                await fetch('/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+                alert('User added successfully!');
+            }
+
+            userForm.reset();
+            userIdInput.value = '';
+            fetchUsers();
+        });
+
+        function editUser(id) {
+            const user = { _id: id }; 
+            userIdInput.value = user._id;
+            nameInput.value = user.name;
+            emailInput.value = user.email;
+            ageInput.value = user.age;
+        }
+
+        async function deleteUser(id) {
+            await fetch(`/users/${id}`, {
+                method: 'DELETE'
+            });
+            alert('User deleted successfully!');
+            fetchUsers();
+        }
+
+       
+        fetchUsers();
+    </script>
+</body>
+
+</html>
